@@ -1,0 +1,74 @@
+07-07-2020 11:28:40.567 [main] INFO 
+				c.p.s.MySqlProjectApplication.logStarting - Starting MySqlProjectApplication on DESKTOP-GVTCLBT with PID 6920 (C:\Users\josed\OneDrive\Documentos\Trabajo Interno\WorkspaceSpringPruebas\MySQLProject\target\classes started by josed in C:\Users\josed\OneDrive\Documentos\Trabajo Interno\WorkspaceSpringPruebas\MySQLProject)
+07-07-2020 11:28:40.569 [main] INFO 
+				c.p.s.MySqlProjectApplication.logStartupProfileInfo - The following profiles are active: development
+07-07-2020 11:28:41.243 [main] INFO 
+				o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Bootstrapping Spring Data JPA repositories in DEFERRED mode.
+07-07-2020 11:28:41.283 [main] INFO 
+				o.s.d.r.c.RepositoryConfigurationDelegate.registerRepositoriesIn - Finished Spring Data repository scanning in 34ms. Found 1 JPA repository interfaces.
+07-07-2020 11:28:41.610 [main] INFO 
+				o.s.b.w.e.tomcat.TomcatWebServer.initialize - Tomcat initialized with port(s): 4040 (http)
+07-07-2020 11:28:41.616 [main] INFO 
+				o.a.coyote.http11.Http11NioProtocol.log - Initializing ProtocolHandler ["http-nio-4040"]
+07-07-2020 11:28:41.616 [main] INFO 
+				o.a.catalina.core.StandardService.log - Starting service [Tomcat]
+07-07-2020 11:28:41.616 [main] INFO 
+				o.a.catalina.core.StandardEngine.log - Starting Servlet engine: [Apache Tomcat/9.0.36]
+07-07-2020 11:28:41.710 [main] INFO 
+				o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring embedded WebApplicationContext
+07-07-2020 11:28:41.711 [main] INFO 
+				o.s.b.w.s.c.ServletWebServerApplicationContext.prepareWebApplicationContext - Root WebApplicationContext: initialization completed in 1116 ms
+07-07-2020 11:28:41.883 [main] INFO 
+				o.s.s.c.ThreadPoolTaskExecutor.initialize - Initializing ExecutorService 'applicationTaskExecutor'
+07-07-2020 11:28:41.910 [task-1] INFO 
+				o.h.jpa.internal.util.LogHelper.logPersistenceUnitInformation - HHH000204: Processing PersistenceUnitInfo [name: default]
+07-07-2020 11:28:41.932 [main] WARN 
+				o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration.openEntityManagerInViewInterceptor - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+07-07-2020 11:28:41.945 [task-1] INFO 
+				org.hibernate.Version.logVersion - HHH000412: Hibernate ORM core version 5.4.17.Final
+07-07-2020 11:28:42.032 [task-1] INFO 
+				o.h.annotations.common.Version.<clinit> - HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+07-07-2020 11:28:42.100 [task-1] INFO 
+				com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Starting...
+07-07-2020 11:28:42.385 [task-1] INFO 
+				com.zaxxer.hikari.HikariDataSource.getConnection - HikariPool-1 - Start completed.
+07-07-2020 11:28:42.401 [task-1] INFO 
+				org.hibernate.dialect.Dialect.<init> - HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+07-07-2020 11:28:42.826 [task-1] INFO 
+				o.h.e.t.j.p.i.JtaPlatformInitiator.initiateService - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+07-07-2020 11:28:42.832 [task-1] INFO 
+				o.s.o.j.LocalContainerEntityManagerFactoryBean.buildNativeEntityManagerFactory - Initialized JPA EntityManagerFactory for persistence unit 'default'
+07-07-2020 11:28:42.865 [main] INFO 
+				o.s.b.a.e.web.EndpointLinksResolver.<init> - Exposing 2 endpoint(s) beneath base path '/actuator'
+07-07-2020 11:28:42.877 [RMI TCP Connection(3)-127.0.0.1] INFO 
+				o.a.c.c.C.[Tomcat].[localhost].[/].log - Initializing Spring DispatcherServlet 'dispatcherServlet'
+07-07-2020 11:28:42.877 [RMI TCP Connection(3)-127.0.0.1] INFO 
+				o.s.web.servlet.DispatcherServlet.initServletBean - Initializing Servlet 'dispatcherServlet'
+07-07-2020 11:28:42.884 [RMI TCP Connection(3)-127.0.0.1] INFO 
+				o.s.web.servlet.DispatcherServlet.initServletBean - Completed initialization in 7 ms
+07-07-2020 11:28:42.889 [main] INFO 
+				o.a.coyote.http11.Http11NioProtocol.log - Starting ProtocolHandler ["http-nio-4040"]
+07-07-2020 11:28:42.907 [main] INFO 
+				o.s.b.w.e.tomcat.TomcatWebServer.start - Tomcat started on port(s): 4040 (http) with context path ''
+07-07-2020 11:28:42.908 [main] INFO 
+				o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Triggering deferred initialization of Spring Data repositories…
+07-07-2020 11:28:43.039 [main] INFO 
+				o.s.d.r.c.DeferredRepositoryInitializationListener.onApplicationEvent - Spring Data repositories initialized!
+07-07-2020 11:28:43.041 [main] INFO 
+				c.p.s.MySqlProjectApplication.logStarted - Started MySqlProjectApplication in 2.738 seconds (JVM running for 3.425)
+07-07-2020 11:28:53.402 [http-nio-4040-exec-2] INFO 
+				c.p.s.controller.UserController.createUser - Creating new user
+07-07-2020 11:28:53.402 [http-nio-4040-exec-2] WARN 
+				c.p.s.controller.UserController.createUser - Creating new user warning
+07-07-2020 11:28:53.402 [http-nio-4040-exec-2] ERROR
+				c.p.s.controller.UserController.createUser - Creating new user error
+07-07-2020 11:32:38.006 [RMI TCP Connection(15)-127.0.0.1] INFO 
+				o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin.shutdown - Application shutdown requested.
+07-07-2020 11:32:38.219 [RMI TCP Connection(15)-127.0.0.1] INFO 
+				o.s.o.j.LocalContainerEntityManagerFactoryBean.destroy - Closing JPA EntityManagerFactory for persistence unit 'default'
+07-07-2020 11:32:38.222 [RMI TCP Connection(15)-127.0.0.1] INFO 
+				o.s.s.c.ThreadPoolTaskExecutor.shutdown - Shutting down ExecutorService 'applicationTaskExecutor'
+07-07-2020 11:32:38.222 [RMI TCP Connection(15)-127.0.0.1] INFO 
+				com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown initiated...
+07-07-2020 11:32:38.238 [RMI TCP Connection(15)-127.0.0.1] INFO 
+				com.zaxxer.hikari.HikariDataSource.close - HikariPool-1 - Shutdown completed.
