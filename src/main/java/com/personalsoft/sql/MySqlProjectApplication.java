@@ -1,4 +1,4 @@
-package com.personalsoft.sqlproject;
+package com.personalsoft.sql;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

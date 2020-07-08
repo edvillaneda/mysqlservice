@@ -2,7 +2,7 @@
 <!DOCTYPE xml>
 
 <configuration>
-    <!--Try this if it doesn't take the path ref  -->
+	<!--Try this if it doesn't take the path ref -->
 	<!--<property name="LOG_PATH" value="logs"/> -->
 	<appender name="STDOUT"
 		class="ch.qos.logback.core.ConsoleAppender">
@@ -28,7 +28,7 @@
 			<appender-ref ref="SAVE-TO-FILE" />
 		</root>
 	</springProfile>
-		<springProfile name="qa">
+	<springProfile name="qa">
 		<root level="info">
 			<appender-ref ref="SAVE-TO-FILE" />
 		</root>
