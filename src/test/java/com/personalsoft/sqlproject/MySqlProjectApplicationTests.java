@@ -7,6 +7,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
@@ -36,6 +37,10 @@ class MySqlProjectApplicationTests {
 
 	private ObjectMapper mapper = new ObjectMapper();
 
+	int Edad = 18;
+	String Nombre = "Edier Andres";
+	String Correo = "edier@test.com";
+
 	@Autowired
 	UserController userControler;
 
@@ -45,20 +50,19 @@ class MySqlProjectApplicationTests {
 	@MockBean
 	UserDao dao;
 
-//	@Test
-//	void contextLoads() {controller.createUser(null);}
+	UserDto userDto;
+
+	@BeforeEach
+	void contextLoads() {
+		userDto = UserDto.builder().name(Nombre).email(Correo).age(Edad).build();
+	}
 
 	@Test
 	void user_UT01_CreateUserSuccess_ReturnOkAndAnUser() throws Exception {
-		int Edad = 15;
-		String Nombre = "Edier Andres";
-		String Correo = "edier@test.com";
 
 		logger.info("user_UT01_CreateUserSuccess_ReturnOkAndAnUser");
 		// GIVEN
-		UserDto userDto = UserDto.builder().name(Nombre).email(Correo).age(Edad).build();
-		// UserEntity userEntityReq = UserEntity.builder().name(Nombre).email(Correo).age(Edad).build();
-		UserEntity userEntityRes = UserEntity.builder().id(1).name(Nombre).email(Correo).age(Edad).build();
+		UserEntity userEntityRes = UserEntity.builder().id(1).name(Nombre).email(Correo).build();
 
 		when(dao.save(any(UserEntity.class))).thenReturn(userEntityRes);
 
@@ -68,10 +72,10 @@ class MySqlProjectApplicationTests {
 		String userEntityJson = mvcRes.getResponse().getContentAsString();
 		UserEntity userEntity = mapper.readValue(userEntityJson, UserEntity.class);
 		// THEN
-		assertEquals(userEntity.getName(), "Edier Andres");
-		assertEquals(userEntity.getEmail(), "edier@test.com");
+		assertEquals("Edier Andres", userEntity.getName());
+		assertEquals("edier@test.com", userEntity.getEmail());
 		assertNotNull(userEntity.getId());
-		assertTrue(userEntity.getAge() >= 18);
+		assertTrue(userDto.getAge() >= 18);
 	}
 
 	private MvcResult getResult(UserDto requestObject) throws Exception {

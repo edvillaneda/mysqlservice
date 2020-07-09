@@ -5,10 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.validation.annotation.Validated;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +28,5 @@ public class UserEntity {
 	private String name;
 	@NotNull
 	private String email;
-	@NotNull
-	private Integer age;
 
 }
