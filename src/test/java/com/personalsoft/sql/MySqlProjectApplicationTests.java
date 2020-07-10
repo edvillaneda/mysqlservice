@@ -1,4 +1,4 @@
-package com.personalsoft.sqlproject;
+package com.personalsoft.sql;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -68,7 +71,7 @@ class MySqlProjectApplicationTests {
 
 		// WHEN
 //		UserEntity userEntity = userControler.save(userDto);
-		MvcResult mvcRes = getResult(userDto);
+		MvcResult mvcRes = getResultPost(userDto);
 		String userEntityJson = mvcRes.getResponse().getContentAsString();
 		UserEntity userEntity = mapper.readValue(userEntityJson, UserEntity.class);
 		// THEN
@@ -78,12 +81,43 @@ class MySqlProjectApplicationTests {
 		assertTrue(userDto.getAge() >= 18);
 	}
 
-	private MvcResult getResult(UserDto requestObject) throws Exception {
+	@Test
+	void user_UT02_UpdateUserSuccess_ReturnOkAndAnUser() throws Exception {
+
+		logger.info("user_UT01_CreateUserSuccess_ReturnOkAndAnUser");
+		// GIVEN
+		UserEntity userEntityRes = UserEntity.builder().id(1).name(Nombre).email(Correo).build();
+		Optional<UserEntity> userResOpt = Optional.of(userEntityRes);
+
+		UserEntity userEntityResEdited = UserEntity.builder().id(1).name("Andres").email(Correo).build();
+
+		when(dao.findById(any(Integer.class))).thenReturn(userResOpt);
+		when(dao.save(any(UserEntity.class))).thenReturn(userEntityResEdited);
+
+		// WHEN
+//		UserEntity userEntity = userControler.updateUser(userDto, 1);
+
+		MvcResult mvcRes = getResultPut(userDto, 1);
+		String userEntityJson = mvcRes.getResponse().getContentAsString();
+		UserEntity userEntity = mapper.readValue(userEntityJson, UserEntity.class);
+
+		// THEN
+		assertEquals("Edier Andres", userEntity.getName());
+	}
+
+	private MvcResult getResultPost(UserDto requestObject) throws Exception {
 		String json = mapper.writeValueAsString(requestObject);
 
 		return this.mock.perform(
 				post("/").accept(MediaType.APPLICATION_JSON).contentType(MediaType.APPLICATION_JSON).content(json))
 				.andReturn();
+	}
+
+	private MvcResult getResultPut(UserDto requestObject, Integer id) throws Exception {
+		String json = mapper.writeValueAsString(requestObject);
+
+		return this.mock.perform(put("/".concat(String.valueOf(id))).accept(MediaType.APPLICATION_JSON)
+				.contentType(MediaType.APPLICATION_JSON).content(json)).andReturn();
 	}
 
 }

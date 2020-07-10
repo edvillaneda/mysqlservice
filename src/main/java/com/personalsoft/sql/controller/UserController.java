@@ -41,12 +41,7 @@ public class UserController {
 	@PostMapping
 	@ResponseBody
 	public UserEntity createUser(@Valid @RequestBody UserDto user) {
-
-		if (user == null)
-			return null;
-
-		return (UserEntity) userService.create(user);
-
+		return userService.create(user);
 	}
 
 	@PutMapping("/{id}")
@@ -65,7 +60,7 @@ public class UserController {
 //	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
 		Map<String, String> errors = new HashMap<>();
-		ex.getBindingResult().getAllErrors().forEach((error) -> {
+		ex.getBindingResult().getAllErrors().forEach(error -> {
 			String fieldName = ((FieldError) error).getField();
 			String errorMessage = error.getDefaultMessage();
 			errors.put(fieldName, errorMessage);
