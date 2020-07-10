@@ -28,5 +28,6 @@ public class UserEntity {
 	private String name;
 	@NotNull
 	private String email;
+	private Integer age;
 
 }
