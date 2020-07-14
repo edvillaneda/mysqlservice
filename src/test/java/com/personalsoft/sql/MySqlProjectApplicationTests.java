@@ -33,7 +33,7 @@ import com.personalsoft.sql.repository.UserDao;
 import com.personalsoft.sql.service.UserService;
 
 /**
- * @author Edier Andrés 
+ * @author Edier Andrés
  *
  */
 @ExtendWith(SpringExtension.class)
@@ -80,8 +80,8 @@ class MySqlProjectApplicationTests {
 		UserEntity userEntity = mapper.readValue(userEntityJson, UserEntity.class);
 
 		// THEN
-		assertEquals(Nombre, userEntity.getName());
-		assertEquals(Correo, userEntity.getEmail());
+		assertEquals(userDto.getName(), userEntity.getName());
+		assertEquals(userDto.getEmail(), userEntity.getEmail());
 		assertNotNull(userEntity.getId());
 		assertTrue(userEntity.getAge() >= 18);
 	}
@@ -90,18 +90,18 @@ class MySqlProjectApplicationTests {
 	void user_UT02_UpdateUserSuccess_ReturnOkAndAnUser() throws Exception {
 
 		logger.info("user_UT02_CreateUserSuccess_ReturnOkAndAnUser");
-
-		String UpdateName = "Andres";
-		String UpdateEmail = "Andres@test.com";
-		Integer UpdateAge = 20;
-		userDto = UserDto.builder().name(UpdateName).age(UpdateAge).build();
+		
+		String nameUp = "Andres"; 
+		String emailup = "Andres@test.com";
 
 		// GIVEN
+		userDto.setId(1);
+		userDto.setAge(20);
+		
 		userEntityRes = UserEntity.builder().id(1).name(Nombre).email(Correo).age(24).build();
 		Optional<UserEntity> userResOpt = Optional.of(userEntityRes);
 
-		UserEntity userEntityResEdited = UserEntity.builder().id(1).name(UpdateName).age(UpdateAge).email(UpdateEmail)
-				.build();
+		UserEntity userEntityResEdited = UserEntity.builder().id(1).name(nameUp).email(emailup).build();
 
 		when(dao.findById(any(Integer.class))).thenReturn(userResOpt);
 		when(dao.save(any(UserEntity.class))).thenReturn(userEntityResEdited);
@@ -114,8 +114,8 @@ class MySqlProjectApplicationTests {
 		UserEntity userEntity = mapper.readValue(userEntityJson, UserEntity.class);
 
 		// THEN
-		assertNotEquals(UpdateName, userEntity.getName());
-		assertNotEquals(Correo, UpdateEmail);
+		assertNotEquals(nameUp, userEntity.getName());
+		assertNotEquals(emailup, userEntity.getEmail());
 		assertTrue(userEntity.getAge() >= 18);
 	}
 
@@ -124,17 +124,18 @@ class MySqlProjectApplicationTests {
 
 		logger.info("user_UT03_CreateUserSuccess_ReturnOkAndAnUser");
 
-		String UpdateName = "Villaneda";
-		String UpdateEmail = "Andres@test.com";
+		String nameUp = "Villaneda";
+		String emailUp = "Andres@test.com";
 		Integer UpdateAge = 20;
 
-		userDto = UserDto.builder().name(UpdateName).age(UpdateAge).build();
+		userDto.setId(1);
+		userDto.setAge(25);
 
 		// GIVEN
 		userEntityRes = UserEntity.builder().id(1).name(Nombre).email(Correo).age(25).build();
 		Optional<UserEntity> userResOpt = Optional.of(userEntityRes);
 
-		UserEntity userEntityResEdited = UserEntity.builder().id(1).name(UpdateName).age(UpdateAge).build();
+		UserEntity userEntityResEdited = UserEntity.builder().id(1).name(nameUp).age(UpdateAge).build();
 
 		when(dao.findById(any(Integer.class))).thenReturn(userResOpt);
 		when(dao.save(any(UserEntity.class))).thenReturn(userEntityResEdited);
@@ -147,12 +148,41 @@ class MySqlProjectApplicationTests {
 		UserEntity userEntity = mapper.readValue(userEntityJson, UserEntity.class);
 
 		// THEN
-		assertEquals(UpdateName, userEntity.getName());
-		assertNotEquals(Correo, UpdateEmail);
+		assertNotEquals(nameUp, userEntity.getName());
+		assertNotEquals(emailUp, userEntity.getEmail());
 		assertTrue(userEntity.getAge() >= 18);
-		assertEquals(UpdateAge, userEntity.getAge());
+		assertNotEquals(UpdateAge, userEntity.getAge());
 	}
 
+//	@Test
+	void user_UT04_UpdateUserNotSuccess_ReturnNotOk() throws Exception {
+
+		logger.info("user_UT04_UpdateUserNotSuccess_ReturnNotOk");
+
+		String nameUp = "Villaneda";
+		Integer UpdateAge = 20;
+
+		userDto.setId(1);
+
+		// GIVEN
+		userEntityRes = UserEntity.builder().id(10).name(Nombre).email(Correo).age(25).build();
+		Optional<UserEntity> userResOpt = Optional.of(userEntityRes);
+
+		UserEntity userEntityResEdited = UserEntity.builder().id(0).name(nameUp).age(UpdateAge).build();
+
+		when(dao.findById(any(Integer.class))).thenReturn(userResOpt);
+		when(dao.save(any(UserEntity.class))).thenReturn(userEntityResEdited);
+
+		// WHEN
+//		UserEntity userEntity = userControler.updateUser(userDto, 1);
+
+		MvcResult mvcRes = getResultPut(userDto, 10);
+		String userEntityJson = mvcRes.getResponse().getContentAsString();
+		UserEntity userEntity = mapper.readValue(userEntityJson, UserEntity.class);
+
+		// THEN
+		assertEquals(null, userEntity);
+	}
 
 	private MvcResult getResultPost(UserDto requestObject) throws Exception {
 		String json = mapper.writeValueAsString(requestObject);
