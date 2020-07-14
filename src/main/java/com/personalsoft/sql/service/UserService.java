@@ -23,26 +23,19 @@ public class UserService {
 		UserEntity userEntity = new UserEntity();
 		userEntity.setEmail(user.getEmail());
 		userEntity.setName(user.getName());
+		userEntity.setAge(user.getAge());
 		return userDao.save(userEntity);
 	}
 
 	public UserEntity update(UserDto user, Integer id) {
 		// get the user, if it doesn't exist put null
 		UserEntity userEntity = userDao.findById(id).orElse(null);
-		if (userEntity != null) {
-			userEntity.setEmail(user.getEmail());
+		if (userEntity != null && userEntity.getAge() >= 25) {
 			userEntity.setName(user.getName());
+			userEntity.setAge(user.getAge());
 			userDao.save(userEntity);
 		}
-		return userEntity;
-	}
-
-	public UserEntity delete(Integer id) {
-
-		UserEntity userEntity = userDao.findById(id).orElse(null);
-		if (userEntity != null) {
-			userDao.delete(userEntity);
-		}
+		
 		return userEntity;
 	}
 }
